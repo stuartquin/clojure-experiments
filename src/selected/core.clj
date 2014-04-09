@@ -18,8 +18,15 @@
      :results (db/run-query ((:body req) "query"))
    }})
 
+(defn fetch-query [req]
+  (let [id (:id (:route-params req))]
+    {:status  200
+     :headers {"Content-Type" "application/json"}
+     :body {:id id :query (persister/get-session id)}}))
+
 (defroutes app-routes
-  (POST "/" [] run-query)
+  (POST "/query" [] run-query)
+  (GET "/query/:id" [id] fetch-query)
   (route/not-found "Not Found"))
 
 (defn -main [& args] ;; entry point, lein run will pick up and start from here
