@@ -21,5 +21,3 @@
   (j/query db
     [query] 
     :as-arrays? true))
-
-defrecord
