@@ -1,11 +1,10 @@
 (ns selected.mysql
-  (:import [java.io PushbackReader])
-  (:require [clojure.java.jdbc :as j]
-            [clojure.java.io :as io]))
+  (:require [clojure.edn :as edn]
+            [clojure.java.jdbc :as j]))
+  
 
 (defn load-config [filename]
-  (with-open [r (io/reader filename)]
-    (read (java.io.PushbackReader. r))))
+  (edn/read-string (slurp filename)))
 
 (let [config (load-config "conf/config.clj")
       db-host (:host (:mysql config))
@@ -22,3 +21,5 @@
   (j/query db
     [query] 
     :as-arrays? true))
+
+defrecord
