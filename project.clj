@@ -15,4 +15,5 @@
                  [ring/ring-core "1.2.2"]
                  [ring/ring-json "0.1.2"]
                  [compojure "1.1.5"]
-                 [ring/ring-jetty-adapter "1.2.2"]])
+                 [ring/ring-jetty-adapter "1.2.2"]]
+  :profiles {:dev {:dependencies [[midje "1.5.1"]]}})
